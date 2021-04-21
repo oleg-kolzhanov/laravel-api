@@ -1,0 +1,8 @@
+client_max_body_size 1024M;
+location @fallback {
+    return 302 https://lovlu.ru/$uri;
+}
+location /uploads {
+    gzip off;
+    error_page 404 = @fallback;
+}
