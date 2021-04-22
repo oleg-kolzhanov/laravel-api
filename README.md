@@ -19,14 +19,7 @@ docker-compose run --rm artisan passport:install
 ## Сгенерировать данные:
 
 ```
-docker-compose build
-
-docker-compose run --rm composer install
-
-docker-compose up -d
-
 docker-compose run --rm composer dumpautoload
-
 docker-compose run --rm artisan db:seed
 ```
 
