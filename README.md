@@ -9,6 +9,9 @@
 
 ```
 cp .env.sample .env
+
+заполнить .env
+
 docker-compose build
 docker-compose run --rm composer install
 docker-compose up -d

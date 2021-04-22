@@ -1,8 +1,5 @@
 version: '3.7'
 
-# https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose-ru
-# https://habr.com/ru/company/otus/blog/520556/
-
 services:
 
   # Database
@@ -57,17 +54,6 @@ services:
     networks:
       - proxy
       - default
-
-#  # Node
-#  webpacker:
-#    image: node:12-alpine
-#    container_name: ${COMPOSE_PROJECT_NAME}-webpacker
-#    command: npm run watch-poll
-#    restart: always
-#    user: ${UID}:${GID}
-#    working_dir: ${APP_PATH}
-#    volumes:
-#      - ${SOURCE_PATH}:${APP_PATH}
 
   # PHP-FPM
   php:
