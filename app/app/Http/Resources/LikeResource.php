@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
-use App\Post;
-use App\User;
+use App\Models\Post;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,7 +24,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class LikeResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Трансформирует лайк в массив.
      *
      * @param Request $request
      * @return array

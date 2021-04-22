@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Model\User;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;

@@ -1,8 +1,8 @@
 <?php
 
-use App\Like;
-use App\Post;
-use App\User;
+use App\Models\Like;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 /**

@@ -4,10 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePostRequest extends FormRequest
+class PostRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Определяет, когда пользователь авторизован для выполнения данного запроса.
      *
      * @return bool
      */
@@ -17,7 +17,7 @@ class UpdatePostRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Правила валидации запроса.
      *
      * @return array
      */

@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
-use App\Like;
-use App\User;
+use App\Models\Like;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

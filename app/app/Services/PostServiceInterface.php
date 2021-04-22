@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
-use App\Post;
+use App\Http\Requests\PostRequest;
+use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\ValidationException;
@@ -26,23 +25,23 @@ interface PostServiceInterface
     /**
      * Создает пост.
      *
-     * @param StorePostRequest $request запрос на создание поста
+     * @param PostRequest $request запрос на создание поста
      * @return Post
      * @throws ValidationException
      * @throws AuthorizationException
      */
-    public function store(StorePostRequest $request): Post;
+    public function store(PostRequest $request): Post;
 
     /**
      * Обновляет пост.
      *
-     * @param UpdatePostRequest $request запрос на обновление поста
+     * @param PostRequest $request запрос на обновление поста
      * @param Post $post пост
      * @return bool
      * @throws ValidationException
      * @throws AuthorizationException
      */
-    public function update(UpdatePostRequest $request, Post $post): bool;
+    public function update(PostRequest $request, Post $post): bool;
 
     /**
      * Удаляет пост.

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\LikeResource;
-use App\Like;
-use App\Post;
+use App\Models\Like;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 /**

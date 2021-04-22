@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -11,13 +12,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property integer $id идентификатор
  * @property integer $user_id идентификатор пользователя
  * @property integer $post_id идентификатор поста
+ * @property Carbon created_at метка времени создания записи
+ * @property Carbon updated_at метка времени редактирования записи
  *
  * @property User $user Автор лайка
  * @property Post $post Пост
  *
- * @package App
  * @method static truncate()
  * @method static firstOrCreate(array $array)
+ *
+ * @package App
  */
 class Like extends Model
 {

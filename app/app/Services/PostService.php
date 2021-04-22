@@ -2,11 +2,11 @@
 
 namespace App\Services;
 
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
-use App\Post;
+use App\Http\Requests\PostRequest;
+use App\Models\Post;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Validation\UnauthorizedException;
 
 /**
  * Сервис по работе с постами.
@@ -48,16 +48,24 @@ class PostService implements PostServiceInterface
     /**
      * @inheritDoc
      */
-    public function store(StorePostRequest $request): Post
+    public function store(PostRequest $request): Post
     {
-        return $this->postModel::create($request->validated());
+        $data = array_merge(
+            ['user_id' => $request->user()->id],
+            $request->validated()
+        );
+        return $this->postModel::create($data);
     }
 
     /**
      * @inheritDoc
+     * @throws UnauthorizedException
      */
-    public function update(UpdatePostRequest $request, Post $post): bool
+    public function update(PostRequest $request, Post $post): bool
     {
+        if ($post->user_id !== $request->user()->id) {
+            throw new UnauthorizedException('Можно редактировать только свои посты', 403);
+        }
         return $post->update($request->only(['title', 'content']));
     }
 

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+use App\Http\Requests\PostRequest;
 use App\Http\Resources\PostResource;
-use App\Post;
+use App\Models\Post;
 use App\Services\PostServiceInterface;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Validation\UnauthorizedException;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -46,42 +46,23 @@ class PostController extends Controller
     }
 
     /**
-     * Создает пост.
-     *
-     * @param StorePostRequest $request
-     * @return PostResource
-     */
-
-    /**
      * Сохраняет новый пост.
      *
-     * @param StorePostRequest $request
+     * @param PostRequest $request запрос создания поста
      * @return PostResource
      * @throws AuthorizationException
      * @throws ValidationException
      */
-    public function store(StorePostRequest $request): PostResource
+    public function store(PostRequest $request): PostResource
     {
-//        try {
-            $post = $this->postService->store($request);
-            return new PostResource($post);
-//        } catch (AuthorizationException $e) {
-//            return response()->json([
-//                'code'      =>  500,
-//                'message'   =>  'Validation error'
-//            ], 500);
-//        } catch (ValidationException $e) {
-//            return response()->json([
-//                'code'      =>  500,
-//                'message'   =>  'Validation error'
-//            ], 500);
-//        }
+        $post = $this->postService->store($request);
+        return new PostResource($post);
     }
 
     /**
      * Возвращает пост.
      *
-     * @param Post $post
+     * @param Post $post пост
      * @return PostResource
      */
     public function show(Post $post): PostResource
@@ -92,22 +73,26 @@ class PostController extends Controller
     /**
      * Обновляет пост.
      *
-     * @param UpdatePostRequest $request запрос обновления поста
+     * @param PostRequest $request запрос обновления поста
      * @param Post $post пост
-     * @return PostResource
+     * @return PostResource|JsonResponse
      * @throws AuthorizationException
      * @throws ValidationException
      */
-    public function update(UpdatePostRequest $request, Post $post): PostResource
+    public function update(PostRequest $request, Post $post)
     {
-        $this->postService->update($request, $post);
-        return new PostResource($post);
+        try {
+            $this->postService->update($request, $post);
+            return new PostResource($post);
+        } catch (UnauthorizedException $exception) {
+            return response()->json('Можно редактировать только свои посты.', 403);
+        }
     }
 
     /**
      * Удаляет пост.
      *
-     * @param Post $post
+     * @param Post $post пост
      * @return JsonResponse
      * @throws Exception
      */
